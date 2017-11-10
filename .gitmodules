@@ -1,0 +1,3 @@
+[submodule "movim_docker"]
+	path = movim_docker
+	url = https://github.com/movim/movim_docker
