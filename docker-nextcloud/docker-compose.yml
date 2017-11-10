@@ -1,0 +1,43 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - '8080:80'
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d
+      - ${PWD}/nextcloud:/var/www/html
+      - phpfpm-socket:/run/php
+
+  nextcloud:
+    image: nextcloud:fpm
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: localhost:/var/run/postgresql/.s.PGSQL.5432
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: nextcloud
+    volumes:
+      - ${PWD}/nextcloud:/var/www/html
+      - phpfpm-socket:/run/php
+      - database-socket:/var/run/postgresql
+
+  postgres:
+    image: postgres:10.0
+    restart: always
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: nextcloud
+    volumes:
+      - ${PWD}/postgres/data:/var/lib/postgresql/data
+      - database-socket:/var/run/postgresql
+
+volumes:
+  phpfpm-socket:
+  database-socket:
