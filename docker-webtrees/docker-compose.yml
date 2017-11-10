@@ -1,0 +1,36 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - '80:80'
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d
+      - ${PWD}/webtrees/webtrees:/var/www/html
+      - phpfpm-socket:/run/php
+
+  webtrees:
+    build: webtrees
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - ${PWD}/webtrees/webtrees:/var/www/html
+      - phpfpm-socket:/run/php
+
+  mariadb:
+    image: mariadb:10.2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: webtrees
+      MYSQL_USER: webtrees
+      MYSQL_PASSWORD: webtrees
+    volumes:
+     - ${PWD}/database:/var/lib/mysql
+
+volumes:
+  phpfpm-socket:
