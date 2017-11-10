@@ -1,0 +1,44 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - '8080:80'
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d
+      - ${PWD}/wordpress:/var/www/html
+      - phpfpm-socket:/run/php
+
+  wordpress:
+    image: wordpress:php7.1-fpm
+    restart: always
+    depends_on:
+      - mariadb
+    environment:
+      WORDPRESS_DB_HOST: localhost:/var/run/mysqld/mysqld.sock
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+    volumes:
+      - ${PWD}/wordpress:/var/www/html
+      - phpfpm-socket:/run/php
+      - database-socket:/var/run/mysqld
+
+  mariadb:
+    image: mariadb:10.2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+     - ${PWD}/database:/var/lib/mysql
+     - database-socket:/var/run/mysqld
+
+volumes:
+  phpfpm-socket:
+  database-socket:
