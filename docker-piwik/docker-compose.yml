@@ -1,0 +1,32 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:mainline-alpine
+    depends_on:
+      - piwik
+    ports:
+      - '8080:80'
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d:ro
+      - ${PWD}/piwik:/var/www/html:ro
+
+  piwik:
+    image: piwik:3.2.0-fpm
+    depends_on:
+      - memcached
+      - mariadb
+    volumes:
+      - ${PWD}/piwik:/var/www/html
+
+  mariadb:
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_DATABASE: piwik
+      MYSQL_USER: piwik
+      MYSQL_PASSWORD: changeme
+    volumes:
+     - ${PWD}/mariadb:/var/lib/mysql
+
+  memcached:
+    image: memcached:1.5.3-alpine
