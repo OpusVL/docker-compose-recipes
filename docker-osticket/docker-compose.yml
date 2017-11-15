@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - '8080:80'
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d
+      - ${PWD}/osticket/osticket:/var/www/html
+
+  osticket:
+    build: osticket
+    restart: always
+    depends_on:
+      - mariadb
+    volumes:
+      - ${PWD}/osticket/osticket:/var/www/html
+
+  mariadb:
+    image: mariadb:10.2
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: osticket
+      MYSQL_USER: osticket
+      MYSQL_PASSWORD: osticket
+    volumes:
+     - ${PWD}/database:/var/lib/mysql
