@@ -7,12 +7,15 @@ RUN set -ex; \
 		libjpeg-dev \
 		libpng-dev \
 		libpq-dev \
+		libldap2-dev \
+		libxml2-dev \
                 git \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
 	docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
-	docker-php-ext-install gd pgsql mysqli opcache zip
+	docker-php-ext-configure ldap --with-libdir=/lib/x86_64-linux-gnu; \
+	docker-php-ext-install gd pgsql mysqli soap opcache ldap zip
 
 RUN { \
 		echo 'opcache.memory_consumption=128'; \
