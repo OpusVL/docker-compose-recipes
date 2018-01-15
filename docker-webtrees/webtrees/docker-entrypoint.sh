@@ -8,7 +8,7 @@ if ! [ -e index.php ]; then
 		( set -x; ls -A; sleep 10 )
 	fi
 	tar cf - --one-file-system -C /usr/src/webtrees-${WEBTREES_VERSION} . | tar xf -
-	echo >&2 "Complete! Webtrees has been successfully copied to $PWD"
+	echo >&2 "Complete! Webtrees ${WEBTREES_VERSION} has been successfully copied to $PWD"
 fi
 
 exec "$@"
