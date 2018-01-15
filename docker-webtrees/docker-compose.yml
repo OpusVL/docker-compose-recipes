@@ -10,7 +10,6 @@ services:
     volumes:
       - ${PWD}/nginx:/etc/nginx/conf.d
       - ${PWD}/webtrees/webtrees:/var/www/html
-      - phpfpm-socket:/run/php
 
   webtrees:
     build: webtrees
@@ -19,7 +18,6 @@ services:
       - mariadb
     volumes:
       - ${PWD}/webtrees/webtrees:/var/www/html
-      - phpfpm-socket:/run/php
 
   mariadb:
     image: mariadb:10.2
@@ -31,6 +29,3 @@ services:
       MYSQL_PASSWORD: webtrees
     volumes:
      - ${PWD}/database:/var/lib/mysql
-
-volumes:
-  phpfpm-socket:
