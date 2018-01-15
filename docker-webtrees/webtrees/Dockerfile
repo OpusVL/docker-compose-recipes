@@ -35,6 +35,14 @@ RUN { \
 		echo 'opcache.enable_cli=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
+RUN { \
+                echo 'file_uploads=On'; \
+                echo 'max_execution_time=80'; \
+                echo 'post_max_size=128M'; \
+                echo 'upload_max_filesize=128M'; \
+                echo 'memory_limit=256M'; \
+        } > /usr/local/etc/php/conf.d/webtrees-recommended.ini
+
 VOLUME /var/www/html
 
 ENV WEBTREES_VERSION 1.7.9
