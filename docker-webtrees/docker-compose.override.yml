@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  nginx:
+    ports:
+      - '80:80'
+    volumes:
+      - ${PWD}/nginx:/etc/nginx/conf.d:ro
+      - ${PWD}/webtrees/webtrees:/var/www/html:ro
+
+  webtrees:
+    volumes:
+      - ${PWD}/webtrees/webtrees:/var/www/html
+
+  mariadb:
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: webtrees
+      MYSQL_USER: webtrees
+      MYSQL_PASSWORD: webtrees
+    volumes:
+      - ${PWD}/database:/var/lib/mysql
