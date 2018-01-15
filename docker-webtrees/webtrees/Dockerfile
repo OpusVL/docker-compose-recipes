@@ -38,9 +38,11 @@ RUN { \
 VOLUME /var/www/html
 
 ENV WEBTREES_VERSION 1.7.9
+ENV WEBTREES_SHA1 294b4bced008b4c0ef1c3979849b93b097717b39
 
 RUN set -ex; \
 	curl -o webtrees.tar.gz -fSL "https://github.com/fisharebest/webtrees/archive/${WEBTREES_VERSION}.tar.gz"; \
+	echo "$WEBTREES_SHA1 *webtrees.tar.gz" | sha1sum -c -; \
 	tar -xzf webtrees.tar.gz -C /usr/src/; \
 	rm webtrees.tar.gz; \
 	chown -R www-data:www-data /usr/src/webtrees-${WEBTREES_VERSION}
