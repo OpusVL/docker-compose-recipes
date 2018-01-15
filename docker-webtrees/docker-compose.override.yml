@@ -5,11 +5,11 @@ services:
       - '80:80'
     volumes:
       - ${PWD}/nginx:/etc/nginx/conf.d:ro
-      - ${PWD}/webtrees/webtrees:/var/www/html:ro
+      - webtrees:/var/www/html:ro
 
   webtrees:
     volumes:
-      - ${PWD}/webtrees/webtrees:/var/www/html
+      - webtrees:/var/www/html
 
   mariadb:
     environment:
@@ -19,3 +19,6 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
     volumes:
       - ${PWD}/database:/var/lib/mysql
+
+volumes:
+  webtrees:
