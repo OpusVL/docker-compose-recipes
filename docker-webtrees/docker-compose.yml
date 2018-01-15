@@ -2,16 +2,16 @@ version: '3.4'
 services:
   nginx:
     image: nginx:latest
-    restart: always
+    restart: on-failure
     depends_on:
       - mariadb
 
   webtrees:
     build: webtrees
-    restart: always
+    restart: on-failure
     depends_on:
       - mariadb
 
   mariadb:
     image: mariadb:10.2
-    restart: always
+    restart: on-failure
