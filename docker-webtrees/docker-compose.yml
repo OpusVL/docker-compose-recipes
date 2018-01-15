@@ -28,4 +28,4 @@ services:
       MYSQL_USER: webtrees
       MYSQL_PASSWORD: webtrees
     volumes:
-     - ${PWD}/database:/var/lib/mysql
+      - ${PWD}/database:/var/lib/mysql
