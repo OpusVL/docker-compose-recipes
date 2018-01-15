@@ -14,4 +14,9 @@ services:
 
   mariadb:
     image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-webtrees}
+      MYSQL_USER: ${MYSQL_USER:-webtrees}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
     restart: on-failure
