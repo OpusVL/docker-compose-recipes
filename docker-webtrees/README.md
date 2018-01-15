@@ -10,7 +10,7 @@ It works from standard GEDCOM files, and is therefore compatible with every  maj
 
 ## How to use this image
 
-### ...from the Docker CLI
+### ... from the Docker CLI
 `docker container run --name webtrees opusvl/webtrees:latest`
 
 ### ... via docker stack deploy or docker-compose
