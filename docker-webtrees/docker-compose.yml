@@ -8,8 +8,8 @@ services:
     ports:
       - '80:80'
     volumes:
-      - ${PWD}/nginx:/etc/nginx/conf.d
-      - ${PWD}/webtrees/webtrees:/var/www/html
+      - ${PWD}/nginx:/etc/nginx/conf.d:ro
+      - ${PWD}/webtrees/webtrees:/var/www/html:ro
 
   webtrees:
     build: webtrees
