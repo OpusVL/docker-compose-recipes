@@ -1,5 +1,9 @@
 # docker-webtrees
 
+# Supported tags and respective `Dockerfile` links
+
+- [`1.7.9`, `latest` (*webtrees/Dockerfile*)](https://github.com/OpusVL/docker-compose-recipes/blob/master/docker-webtrees/webtrees/Dockerfile)
+
 ## What is Webtrees?
 
 Webtrees is the web's leading on-line collaborative genealogy application. It is open source software, and costs $ zero - yes, that means totally FREE!
@@ -7,6 +11,11 @@ Webtrees is the web's leading on-line collaborative genealogy application. It is
 All you need to use it is a website with PHP and MySQL installed.
 
 It works from standard GEDCOM files, and is therefore compatible with every  major desktop application; and it aims to be efficient and effective by using the right combination of third-party tools, design techniques and open standards.
+
+
+> [wikipedia.org/wiki/Webtrees](https://en.wikipedia.org/wiki/Webtrees)
+
+![logo](https://wiki.webtrees.net/en/w/skins/webtrees-135x135.png)
 
 ## How to use this image
 
