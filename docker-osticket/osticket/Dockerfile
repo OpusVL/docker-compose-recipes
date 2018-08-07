@@ -30,7 +30,7 @@ RUN { \
 
 VOLUME /var/www/html
 
-ENV OSTICKET_VERSION 1.10.1
+ENV OSTICKET_VERSION 1.10.4
 
 RUN set -ex; \
 	curl -o osticket.tar.gz -fSL "https://github.com/osTicket/osTicket/archive/v${OSTICKET_VERSION}.tar.gz"; \
