@@ -28,8 +28,8 @@ RUN { \
 
 VOLUME /var/www/html
 
-ENV MANTISBT_VERSION 2.8.0
-ENV MANTISBT_SHA1 6110c2aa5902008d44af454dd264499dce10ca0b
+ENV MANTISBT_VERSION 2.24.1
+ENV MANTISBT_SHA1 fa452e391efe054bd225df45afb37e55b39b5e19
 
 RUN set -ex; \
 	curl -o mantisbt.tar.gz -fSL "https://github.com/mantisbt/mantisbt/archive/release-${MANTISBT_VERSION}.tar.gz"; \
@@ -45,6 +45,6 @@ RUN curl -sS https://getcomposer.org/installer | php \
 
 WORKDIR /var/www/html
 
-COPY docker-entrypoint.sh /usr/local/bin/
-ENTRYPOINT ["docker-entrypoint.sh"]
+COPY entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["php-fpm"]
