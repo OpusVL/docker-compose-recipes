@@ -9,6 +9,7 @@ RUN set -ex; \
 		libpq-dev \
 		libldap2-dev \
 		libxml2-dev \
+		unzip \
                 git \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
